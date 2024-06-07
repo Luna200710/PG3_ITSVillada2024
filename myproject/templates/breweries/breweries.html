@@ -1,0 +1,69 @@
+<!-- breweries/templates/breweries/breweries.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervecerías</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Cervecerías</h1>
+
+        <form method="GET" class="mb-4">
+            <div class="form-row">
+                <div class="col">
+                    <label for="country">País</label>
+                    <select id="country" name="country" class="form-control">
+                        <option value="">Todos</option>
+                        <option value="Austria" {% if selected_country == "Austria" %}selected{% endif %}>Austria</option>
+                        <option value="United Kingdom" {% if selected_country == "United Kingdom" %}selected{% endif %}>Inglaterra</option>
+                        <option value="France" {% if selected_country == "France" %}selected{% endif %}>Francia</option>
+                        <option value="Isle of Man" {% if selected_country == "Isle of Man" %}selected{% endif %}>Isla de Man</option>
+                        <option value="Ireland" {% if selected_country == "Ireland" %}selected{% endif %}>Irlanda</option>
+                        <option value="Poland" {% if selected_country == "Poland" %}selected{% endif %}>Polonia</option>
+                        <option value="Portugal" {% if selected_country == "Portugal" %}selected{% endif %}>Portugal</option>
+                        <option value="Scotland" {% if selected_country == "Scotland" %}selected{% endif %}>Escocia</option>
+                        <option value="Singapore" {% if selected_country == "Singapore" %}selected{% endif %}>Singapur</option>
+                        <option value="South Korea" {% if selected_country == "South Korea" %}selected{% endif %}>Corea del Sur</option>
+                        <option value="United States" {% if selected_country == "United States" %}selected{% endif %}>Estados Unidos</option>
+                        <!-- Añade más opciones de países según sea necesario -->
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="city">Ciudad</label>
+                    <input type="text" id="city" name="city" class="form-control" value="{{ selected_city }}" placeholder="Ciudad">
+                </div>
+                <div class="col">
+                    <label>&nbsp;</label>
+                    <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Ciudad</th>
+                    <th>Estado</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for brewery in breweries %}
+                <tr>
+                    <td>{{ brewery.name }}</td>
+                    <td>{{ brewery.brewery_type }}</td>
+                    <td>{{ brewery.city }}</td>
+                    <td>{{ brewery.state }}</td>
+                    <td>{{ brewery.country }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
